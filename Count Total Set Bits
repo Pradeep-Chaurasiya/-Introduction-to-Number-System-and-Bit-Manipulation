@@ -1,0 +1,72 @@
+public class Solution {               // 000 --> 0
+                                      // 001 --> 1
+                                      // 010 --> 2   // here there is pattern --> int 1 bit postion 0 1 is repeating
+                                      // 011 --> 3   // 0 0 1 1 repeating at 2 bit position 
+                                      // 100 --> 4   // 0 0 0 0 1 1 1 1 --> repeating at third postion
+                                      // 101 --> 5
+                                      // 110 --> 6  // so 1st bit postion -- > 2 period
+                                      // 111 --> 7 // so 2nd bit postion -- > 4 period
+                                                   // 3rd bit position -- > 8 period
+                                         // No  of groups  = (A+1)/peroid; (including zero) at every bit position
+                                        // no of set bit = groups*(no of set bit) + remainder;
+                                    // no of set bit --> half_period = period/2;
+                                   // remiander = (A+1)%period
+                                                   
+    public int solve(int A) {        
+        
+        long count = 0;              
+        int mod = 1000000007;
+        
+           
+           long period = 2;  
+           while(period<=A*2){
+           long half_period = period/2;   // no of set bit = period/2
+           long rem = (A+1)%period;
+           if(rem<= half_period)
+           {
+               rem = 0;
+           }
+           
+           else if(rem>half_period){
+               rem = rem - half_period;
+               
+           }
+           long groups = (A+1)/period;
+            count = (count%mod + (groups%mod*half_period%mod)%mod + rem%mod)%mod;
+            
+            period = period*2;
+           }
+    
+    return (int)count;
+    }
+}
+
+
+# time complexity error
+
+public class Solution {
+    public int solve(int A) {
+        
+        long count =0;
+        int mod = 1000000007;
+        for(int i=1; i<=A; i++)
+        {
+            int temp=i;
+            while(temp>0)
+            {
+                int rem = temp%2;
+                if(rem==1)
+                {
+                    count = (count%mod+1%mod)%mod;
+                    
+                }
+                
+                temp = temp >> 1;
+                
+            }
+            
+        }
+        
+        return (int)count;
+    }
+}
