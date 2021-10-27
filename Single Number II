@@ -1,0 +1,46 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int singleNumber(final int[] A) {
+        
+    //    int ans = count(A);
+    //    return ans;
+        int B[] = A.clone();
+        int num = 0;
+        int power = 0;
+        for(int i=0; i<32; i++){
+            int count = 0;
+            for(int j=0; j<B.length; j++){
+                if((B[j]&1)==1) count++;
+                B[j] = B[j]>>1;
+            }
+            
+            int rem = count%3;
+            num += rem*(int)Math.pow(2,power++);
+        }
+        return num;
+    }
+    
+    // int num  = 0;  // by recursion
+    // int power = 0;
+    // int count(int []arr){
+        
+    //     int max = Integer.MIN_VALUE;
+    //     for(int i=0; i<arr.length; i++){
+    //         if(arr[i]>max) max= arr[i];
+    //     }
+    //     if(max == 0) return num;
+        
+    //     int count = 0;
+    //     for(int i=0; i<arr.length; i++){
+    //         if((arr[i]&1) == 1){
+    //             count++;
+    //         }
+    //        arr[i] = arr[i]>>1;
+    //     }
+    //     int rem = count%3;
+        
+    //     num += rem*(int)Math.pow(2, power++);
+        
+    //     return count(arr);
+    // }
+}
